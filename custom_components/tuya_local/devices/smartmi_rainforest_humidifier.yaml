@@ -1,8 +1,7 @@
-name: Humidifier
+name: Rainforest Humidifier
 products:
   - id: ahoqsnorxmf2g70s
     manufacturer: Smartmi
-    model: Rainforest
 entities:
   - entity: humidifier
     class: humidifier
@@ -19,8 +18,8 @@ entities:
         name: humidity
         type: integer
         range:
-          min: 0
-          max: 100
+          min: 20
+          max: 80
       - id: 14
         name: current_humidity
         type: integer
@@ -36,108 +35,108 @@ entities:
             value: boost
           - dps_val: manual
             value: manual
+
   - entity: switch
-    translation_key: buzzer
+    name: Beeper
     category: config
     dps:
       - id: 106
-        type: boolean
         name: switch
+        type: boolean
+
   - entity: sensor
     translation_key: water_level
     dps:
       - id: 17
         name: sensor
         type: integer
+        unit: "%"
         range:
           min: 0
           max: 100
-      
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  - entity: binary_sensor
+
+  - entity: sensor
+    name: Temp C
+    readonly: true
     category: diagnostic
-    class: opening
+    dps:
+      - id: 10
+        name: sensor
+        type: integer
+        unit: "C"
+        range:
+          min: -20
+          max: 50
+
+  - entity: sensor
+    name: Temp F
+    readonly: true
+    category: diagnostic
+    dps:
+      - id: 13
+        name: sensor
+        type: integer
+        unit: "F"
+        range:
+          min: -30
+          max: 100
+
+  - entity: number
+    name: country_code
+    category: diagnostic
+    hidden: true
+    dps:
+      - id: 109
+        name: value
+        type: integer
+        range:
+          min: 0
+          max: 9999
+
+  - entity: number
+    name: fan_speed
+    category: config
+    dps:
+      - id: 105
+        name: value
+        type: integer
+        unit: "%"
+        range:
+          min: 0
+          max: 100
+
+  - entity: sensor
+    name: fan_speed_reading
+    readonly: true
+    category: diagnostic
+    dps:
+      - id: 107
+        name: value
+        type: integer
+        unit: "rpm"
+        range:
+          min: 0
+          max: 1160
+
+  - entity: select
+    name: Backlight
+    category: config
+    dps:
+      - id: 34
+        type: string
+        name: option
+        mapping:
+          - dps_val: closed
+            value: "off"
+          - dps_val: level_1
+            value: "low"
+          - dps_val: level_2
+            value: "high"
+
+  - entity: binary_sensor
+    name: Fault Alarm
+    readonly: true
     dps:
       - id: 22
-        type: string
+        type: boolean
         name: sensor
-        mapping:
-          - dps_val: 0
-            value: false
-          - dps_val: 1
-            value: true
-  - entity: switch
-    translation_key: electrolytic_sterilization
-    category: config
-    dps:
-      - id: 21
-        type: boolean
-        name: switch
-  - entity: switch
-    translation_key: evaporator_cleaning
-    category: config
-    dps:
-      - id: 2
-        type: boolean
-        name: switch
-  - entity: switch
-    translation_key: uv_sterilization
-    category: config
-    dps:
-      - id: 102
-        type: boolean
-        name: switch
-  - entity: light
-    translation_key: display
-    category: config
-    dps:
-      - id: 5
-        type: boolean
-        name: switch
-  - entity: switch
-    translation_key: keytone
-    category: config
-    dps:
-      - id: 8
-        type: boolean
-        name: switch
-  - entity: sensor
-    translation_key: water_level
-    class: enum
-    category: diagnostic
-    dps:
-      - id: 101
-        name: sensor
-        type: string
-        mapping:
-          - dps_val: No_water
-            value: empty
-          - dps_val: Low_water
-            value: low
-          - dps_val: Middle_water
-            value: medium
-          - dps_val: High_water
-            value: high
-          - dps_val: Full_water
-            value: full
-  - entity: switch
-    translation_key: ionizer
-    dps:
-      - id: 25
-        name: switch
-        type: boolean
-  - entity: lock
-    translation_key: child_lock
-    category: config
-    dps:
-      - id: 29
-        type: boolean
-        name: lock
